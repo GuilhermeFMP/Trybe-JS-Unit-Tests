@@ -11,19 +11,20 @@
     - average([1, '2']) // Retorno: undefined;
 */
 
-const itsANumber = (array) => {
+const itsANumbers = (array) => {
   let numbers = [];
   for (let index = 0; index < array.length; index += 1) {
     if (typeof array[index] !== 'number') {
-      return undefined; 
+      return false; 
     }
   }
+  return true;
 };
 
 const roundNumber = (array) => {
   let newArray = [];
   for (let index = 0; index < array.length; index += 1) {
-    newArray.push(array[index].toFixed());
+    newArray.push(Number(array[index].toFixed()));
   }
   return newArray;
 };
@@ -33,21 +34,19 @@ const media = (array) => {
   for (let index = 0; index < array.length; index += 1) {
     soma += array[index];
   }
-  return soma / array.length;
+  return Number((soma / array.length).toFixed());
 };
 
 const average = (array) => {
   if (array.length === 0) {
     return undefined;
   }
-  if (itsANumber(array) === undefined) {
+  if (!itsANumbers(array)) {
     return undefined;
   }
   let round = roundNumber(array);
   let resultado = media(round);
   return resultado;
 };
-
-console.log(average([3, 4, 5]));
 
 module.exports = average;
